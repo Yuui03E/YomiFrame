@@ -50,13 +50,3 @@ To build YomiFrame yourself, you'll need the [.NET 8 SDK](https://dotnet.microso
    dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true
    ```
 4. Find your compiled `YomiFrame.exe` in `bin/Release/net8.0-windows/win-x64/publish/`.
-
-## 📸 Screenshots
-
-*(Consider dropping a few screenshots here of your frameless UI and the awesome Double Page shadow effect!)*
-
----
-
-<div align="center">
-  Built with ❤️ for manga lovers.
-</div>

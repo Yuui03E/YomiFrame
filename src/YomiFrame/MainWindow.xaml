@@ -1,0 +1,160 @@
+<Window x:Class="YomiFrame.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:skia="clr-namespace:SkiaSharp.Views.WPF;assembly=SkiaSharp.Views.WPF"
+        Title=""
+        Width="1280" Height="720"
+        MinWidth="400" MinHeight="300"
+        WindowStyle="None"
+        AllowsTransparency="False"
+        ResizeMode="CanResize"
+        Background="Black"
+        AllowDrop="True"
+        SnapsToDevicePixels="True"
+        UseLayoutRounding="True">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="32"
+                      ResizeBorderThickness="6"
+                      GlassFrameThickness="0"
+                      CornerRadius="0"
+                      UseAeroCaptionButtons="False" />
+    </WindowChrome.WindowChrome>
+
+    <Grid x:Name="RootGrid" Background="Black">
+        <Grid.RowDefinitions>
+            <!-- Title bar: Auto (collapses with TitleBar grid) -->
+            <RowDefinition Height="Auto" />
+            <!-- Content area: fill -->
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- ═══════════════════════════════════════════════════ -->
+        <!-- TITLE BAR                                            -->
+        <!-- ═══════════════════════════════════════════════════ -->
+        <Grid x:Name="TitleBar" Grid.Row="0" Height="32" Background="Black">
+            <!-- Min/Max/Close buttons, top-right -->
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top">
+
+                <!-- Minimize -->
+                <Button x:Name="BtnMinimize"
+                        Style="{StaticResource TitleBarButtonStyle}"
+                        Click="BtnMinimize_Click"
+                        WindowChrome.IsHitTestVisibleInChrome="True"
+                        ToolTip="Minimize">
+                    <TextBlock Text="&#xE921;" FontFamily="Segoe MDL2 Assets" FontSize="10" />
+                </Button>
+
+                <!-- Maximize / Restore -->
+                <Button x:Name="BtnMaximize"
+                        Style="{StaticResource TitleBarButtonStyle}"
+                        Click="BtnMaximize_Click"
+                        WindowChrome.IsHitTestVisibleInChrome="True"
+                        ToolTip="Maximize">
+                    <TextBlock x:Name="MaximizeIcon" Text="&#xE922;" FontFamily="Segoe MDL2 Assets" FontSize="10" />
+                </Button>
+
+                <!-- Close -->
+                <Button x:Name="BtnClose"
+                        Style="{StaticResource CloseButtonStyle}"
+                        Click="BtnClose_Click"
+                        WindowChrome.IsHitTestVisibleInChrome="True"
+                        ToolTip="Close">
+                    <TextBlock Text="&#xE8BB;" FontFamily="Segoe MDL2 Assets" FontSize="10" />
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <!-- ═══════════════════════════════════════════════════ -->
+        <!-- MAIN CONTENT: SkiaSharp rendering surface            -->
+        <!-- ═══════════════════════════════════════════════════ -->
+        <Grid Grid.Row="1" ClipToBounds="True">
+            <skia:SKElement x:Name="SkiaCanvas"
+                            PaintSurface="SkiaCanvas_PaintSurface" />
+
+            <!-- Loading Toast Notification (bottom-right) -->
+            <Border x:Name="LoadingToast"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Margin="0,0,16,16"
+                    Padding="16,10"
+                    CornerRadius="8"
+                    Background="{StaticResource ToastBackgroundBrush}"
+                    Opacity="0"
+                    IsHitTestVisible="False">
+                <StackPanel Orientation="Horizontal">
+                    <!-- Spinner -->
+                    <Border x:Name="SpinnerDot" Width="14" Height="14" Margin="0,0,10,0">
+                        <Border.RenderTransform>
+                            <RotateTransform x:Name="SpinnerRotation" CenterX="7" CenterY="7" />
+                        </Border.RenderTransform>
+                        <Ellipse Width="14" Height="14"
+                                 StrokeThickness="2"
+                                 Stroke="{StaticResource AccentBrush}"
+                                 StrokeDashArray="2.5 2"
+                                 StrokeDashCap="Round" />
+                    </Border>
+                    <!-- Message -->
+                    <TextBlock x:Name="LoadingText"
+                               Text="Loading..."
+                               Foreground="{StaticResource TextBrush}"
+                               FontFamily="Segoe UI"
+                               FontSize="12"
+                               VerticalAlignment="Center" />
+                </StackPanel>
+            </Border>
+
+            <!-- Success Toast (bottom-right, same position) -->
+            <Border x:Name="SuccessToast"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Margin="0,0,16,16"
+                    Padding="16,10"
+                    CornerRadius="8"
+                    Background="{StaticResource ToastBackgroundBrush}"
+                    Opacity="0"
+                    IsHitTestVisible="False">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="✓"
+                               Foreground="#FF4CAF50"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Margin="0,0,8,0"
+                               VerticalAlignment="Center" />
+                    <TextBlock x:Name="SuccessText"
+                               Text="Ready"
+                               Foreground="{StaticResource TextBrush}"
+                               FontFamily="Segoe UI"
+                               FontSize="12"
+                               VerticalAlignment="Center" />
+                </StackPanel>
+            </Border>
+
+            <!-- Page Info (bottom-left, shown briefly on page turn) -->
+            <Border x:Name="PageInfoBadge"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    Margin="16,0,0,16"
+                    Padding="12,6"
+                    CornerRadius="6"
+                    Background="{StaticResource ToastBackgroundBrush}"
+                    Opacity="0"
+                    IsHitTestVisible="False">
+                <TextBlock x:Name="PageInfoText"
+                           Text="1 / 100"
+                           Foreground="{StaticResource TextDimBrush}"
+                           FontFamily="Segoe UI"
+                           FontSize="11"
+                           VerticalAlignment="Center" />
+            </Border>
+
+        </Grid>
+
+        <!-- Right-click context menu applies to entire window -->
+        <Grid.ContextMenu>
+            <ContextMenu x:Name="MainContextMenu" />
+        </Grid.ContextMenu>
+    </Grid>
+</Window>

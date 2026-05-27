@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>📖 KuroReader</h1>
+  <h1>📖 YomiFrame</h1>
   <p><strong>A blazing fast, minimalist, GPU-accelerated Manga Reader for Windows.</strong></p>
 
   [![Platform](https://img.shields.io/badge/Platform-Windows-blue.svg)](#)
@@ -9,12 +9,12 @@
 
 <br />
 
-KuroReader is a custom-built manga and comic reader designed for people who want a completely distraction-free, lightning-fast reading experience. No bloated menus, no library managers running in the background—just drop your manga into the frameless window and start reading instantly.
+YomiFrame is a custom-built manga and comic reader designed for people who want a completely distraction-free, lightning-fast reading experience. No bloated menus, no library managers running in the background—just drop your manga into the frameless window and start reading instantly.
 
 ## ✨ Features
 
-- 🚀 **Blazing Fast GPU Rendering:** Powered by `SkiaSharp`, KuroReader chews through 4K manga pages effortlessly with minimal CPU usage.
-- 📚 **Massive Multi-Archive Stitching:** Drag and drop 20 `.zip` or `.rar` volumes into the app at once. KuroReader instantly stitches them together in memory, allowing you to seamlessly read from Volume 1 to Volume 20 without a single interruption.
+- 🚀 **Blazing Fast GPU Rendering:** Powered by `SkiaSharp`, YomiFrame chews through 4K manga pages effortlessly with minimal CPU usage.
+- 📚 **Massive Multi-Archive Stitching:** Drag and drop 20 `.zip` or `.rar` volumes into the app at once. YomiFrame instantly stitches them together in memory, allowing you to seamlessly read from Volume 1 to Volume 20 without a single interruption.
 - 🎨 **Minimalist Frameless UI:** No title bars, no permanent menus. Just the manga and a sleek right-click context menu.
 - 📖 **Advanced Reading Modes:**
   - **Single Page:** Standard fit-to-screen reading.
@@ -28,28 +28,28 @@ KuroReader is a custom-built manga and comic reader designed for people who want
 ## 📥 Installation
 
 1. Go to the [Releases](../../releases) tab.
-2. Download the `KuroReader.exe` portable file.
+2. Download the `YomiFrame.exe` portable file.
 3. Place it anywhere on your PC and double-click to run. No installation required!
 
-> **Note:** To associate files with KuroReader, right-click any `.cbz` or `.zip` file, select `Open With...`, and choose `KuroReader.exe`.
+> **Note:** To associate files with YomiFrame, right-click any `.cbz` or `.zip` file, select `Open With...`, and choose `YomiFrame.exe`.
 
 ## 🛠️ Building from Source
 
-To build KuroReader yourself, you'll need the [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0).
+To build YomiFrame yourself, you'll need the [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0).
 
 1. Clone the repository:
    ```cmd
-   git clone https://github.com/Yuui03E/KuroReader.git
+   git clone https://github.com/Yuui03E/YomiFrame.git
    ```
 2. Navigate to the source directory:
    ```cmd
-   cd KuroReader/src/KuroReader
+   cd YomiFrame/src/YomiFrame
    ```
 3. Publish as a single, self-contained executable:
    ```cmd
    dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true
    ```
-4. Find your compiled `KuroReader.exe` in `bin/Release/net8.0-windows/win-x64/publish/`.
+4. Find your compiled `YomiFrame.exe` in `bin/Release/net8.0-windows/win-x64/publish/`.
 
 ## 📸 Screenshots
 
